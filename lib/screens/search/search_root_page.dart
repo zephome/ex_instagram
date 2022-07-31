@@ -7,13 +7,14 @@ import 'search_focus.dart';
 class SearchRootPage extends StatelessWidget {
   const SearchRootPage({Key? key}) : super(key: key);
   
-  Widget _appbar() {
+  Widget _appbar(BuildContext context) {
     return Row(
       children: <Widget>[
         Expanded(
           child: GestureDetector(
             onTap: () {
-              Get.to(SearchFocus());
+              //Get.to(SearchFocus());
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchFocus()));
             },
             child: Container(
               padding: const EdgeInsets.symmetric(
@@ -60,7 +61,7 @@ class SearchRootPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            _appbar(),
+            _appbar(context),
             Expanded(child: _body())
           ],
         ),

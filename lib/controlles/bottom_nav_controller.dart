@@ -2,6 +2,7 @@
 import 'package:ex_instagram/screens/activity/activity_root_page.dart';
 import 'package:ex_instagram/screens/mypage/mypage_root_page.dart';
 import 'package:ex_instagram/screens/search/search_root_page.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../screens/home/home_root_page.dart';
@@ -16,6 +17,8 @@ enum PageName {
 }
 
 class BottomNavController extends GetxController {
+  static BottomNavController get to => Get.find();
+  GlobalKey<NavigatorState> searchPageNavigationKey = GlobalKey<NavigatorState>();
   RxInt currentIndex = 0.obs;
   List<int> bottomHistory = [0];
 
@@ -77,6 +80,13 @@ class BottomNavController extends GetxController {
     if (bottomHistory.length == 1) {
       return true;
     } else {
+      var page = PageName.values[bottomHistory.last];
+
+      if (page == PageName.search) {
+        var value = await searchPageNavigationKey.currentState!.maybePop();
+        if (value) return false;
+      }
+
       bottomHistory.removeLast();
       var index = bottomHistory.last;
       changeBottomNav(index, hasGesture: false);

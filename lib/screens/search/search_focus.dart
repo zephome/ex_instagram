@@ -1,4 +1,5 @@
 import 'package:ex_instagram/components/asset_image_data.dart';
+import 'package:ex_instagram/controlles/bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,7 +90,9 @@ class _SearchFocusState extends State<SearchFocus> with TickerProviderStateMixin
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: Get.back,
+          onTap: () {
+            BottomNavController.to.willPopAction();
+          },
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: AssetImageData(

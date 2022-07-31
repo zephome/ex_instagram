@@ -24,7 +24,12 @@ class AppPage extends GetView<BottomNavController> {
               index: controller.currentIndex.value,
               children: <Widget>[
                 HomeRootPage(),
-                SearchRootPage(),
+                Navigator(
+                  key: controller.searchPageNavigationKey,
+                  onGenerateRoute: (routeSetting) {
+                    return MaterialPageRoute(builder: (context) => SearchRootPage());
+                  },
+                ),
                 Container(child: Center(child: Text('UPLOAD'))),
                 Container(child: Center(child: Text('ACTIVITY'))),
                 Container(child: Center(child: Text('MYPAGE'))),
